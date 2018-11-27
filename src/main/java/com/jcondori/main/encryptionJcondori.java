@@ -7,25 +7,11 @@ import java.util.List;
 
 public class encryptionJcondori {
 
+    private InversaMatriz inversa = new InversaMatriz();
+    private double[][] encriptador = {{13, 2, 4, 8}, {9, 1, 6, 5}, {3, 4, 2, 4}, {5, 6, 7, 1}};
+
     public String encriptar(String mensaje) {
         try {
-            double[][] encriptador = new double[4][4];
-            encriptador[0][0] = 13;
-            encriptador[1][0] = 9;
-            encriptador[2][0] = 3;
-            encriptador[3][0] = 5;
-            encriptador[0][1] = 2;
-            encriptador[1][1] = 1;
-            encriptador[2][1] = 4;
-            encriptador[3][1] = 6;
-            encriptador[0][2] = 4;
-            encriptador[1][2] = 6;
-            encriptador[2][2] = 2;
-            encriptador[3][2] = 7;
-            encriptador[0][3] = 8;
-            encriptador[1][3] = 5;
-            encriptador[2][3] = 4;
-            encriptador[3][3] = 1;
 
             double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
 
@@ -35,26 +21,33 @@ public class encryptionJcondori {
         }
     }
 
-    public String desencriptar(String mensaje) {
-        double[][] desencriptador = new double[4][4];
-        desencriptador[0][0] = 0.23015873015873023;
-        desencriptador[1][0] = 0.10185185185185194;
-        desencriptador[2][0] = -0.22883597883597884;
-        desencriptador[3][0] = -0.16005291005291025;
-        desencriptador[0][1] = -0.20634920634920653;
-        desencriptador[1][1] = -0.24074074074074084;
-        desencriptador[2][1] = 0.3201058201058201;
-        desencriptador[3][1] = 0.23544973544973577;
-        desencriptador[0][2] = -0.23015873015873017;
-        desencriptador[1][2] = 0.0648148148148148;
-        desencriptador[2][2] = 0.062169312169312166;
-        desencriptador[3][2] = 0.3267195767195768;
-        desencriptador[0][3] = 0.11111111111111112;
-        desencriptador[1][3] = 0.12962962962962962;
-        desencriptador[2][3] = -0.018518518518518517;
-        desencriptador[3][3] = -0.20370370370370375;
+    public String encriptar(String mensaje, int llave) {
+        try {
 
-        double[][] resultado = this.multiplicarMatriz(desencriptador, this.convertToMatrizSinMyAscii(mensaje));
+            double[][] encriptador = alterarMatriz(this.encriptador.clone(), llave);
+
+            double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
+
+            return this.convertToTextCifrado(resultado);
+
+        } catch (Exception e) {
+            return "Carracteres no validos";
+        }
+    }
+
+    public String desencriptar(String mensaje) {
+
+        double[][] resultado = this.multiplicarMatriz(inversa.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
+
+        return this.convertToMensaje(resultado);
+
+    }
+
+    public String desencriptar(String mensaje, int llave) {
+
+        double[][] encriptador = alterarMatriz(this.encriptador.clone(), llave);
+
+        double[][] resultado = this.multiplicarMatriz(inversa.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
 
         return this.convertToMensaje(resultado);
 
@@ -132,6 +125,19 @@ public class encryptionJcondori {
         return result;
     }
 
+    private double[][] multiplicarMatrizAlterando(double[][] llave, double[][] mensaje, int alteracion) {
+        double[][] result = new double[llave.length][mensaje[0].length];
+        if (llave[0].length != mensaje.length) return result; // matrix multiplication is not possible
+        for (int i = 0; i < llave.length; i++) {         // rows from llave
+            for (int j = 0; j < mensaje[0].length; j++) {     // columns from mensaje
+                for (int k = 0; k < llave[0].length; k++) { // columns from llave
+                    result[i][j] += (llave[i][k] + (alteracion)) * mensaje[k][j];
+                }
+            }
+        }
+        return result;
+    }
+
     private String myPintar(String letra) {
         switch (letra) {
             case "0":
@@ -192,6 +198,25 @@ public class encryptionJcondori {
             default:
                 return letra;
         }
+    }
+
+    public void imprimirMatriz(double[][] mat) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                System.out.print(mat[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public double[][] alterarMatriz(double[][] mat, int llave) {
+        double[][] result = new double[mat.length][mat[0].length];
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                result[i][j] = mat[i][j] + (llave);
+            }
+        }
+        return result;
     }
 
 }
