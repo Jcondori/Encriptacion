@@ -24,7 +24,7 @@ public class encryptionJcondori {
     public String encriptar(String mensaje, int llave) {
         try {
 
-            double[][] encriptador = alterarMatriz(this.encriptador.clone(), llave);
+            double[][] encriptador = alterarMatriz(this.encriptador, llave);
 
             double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
 
@@ -45,7 +45,7 @@ public class encryptionJcondori {
 
     public String desencriptar(String mensaje, int llave) {
 
-        double[][] encriptador = alterarMatriz(this.encriptador.clone(), llave);
+        double[][] encriptador = alterarMatriz(this.encriptador, llave);
 
         double[][] resultado = this.multiplicarMatriz(inversa.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
 
