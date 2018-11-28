@@ -15,8 +15,20 @@ public class encryptionJcondori {
         try {
 
             double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
-
+//            System.out.println("Matriz llave por defecto");
+//            imprimirMatriz(encriptador);
+//            System.out.println("Matriz resultado");
+//            imprimirMatriz(resultado);
             return this.convertToTextCifrado(resultado);
+        } catch (Exception e) {
+            return "Carracteres no validos";
+        }
+    }
+
+    public String encriptarv2(String mensaje) {
+        try {
+            double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
+            return this.convertToTextCifradov2(resultado);
         } catch (Exception e) {
             return "Carracteres no validos";
         }
@@ -39,6 +51,14 @@ public class encryptionJcondori {
     public String desencriptar(String mensaje) {
 
         double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
+
+        return this.convertToMensaje(resultado);
+
+    }
+
+    public String desencriptarv2(String mensaje) {
+
+        double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAsciiv2(mensaje));
 
         return this.convertToMensaje(resultado);
 
@@ -77,6 +97,10 @@ public class encryptionJcondori {
                 i++;
             }
         }
+//        System.out.println("Matriz mensaje");
+//        imprimirMatrizSinAcsii(matriz);
+//        System.out.println("Matriz mensaje ascci");
+//        imprimirMatriz(matriz);
         return matriz;
     }
 
@@ -90,9 +114,26 @@ public class encryptionJcondori {
             }
         }
         cifrado = cifrado.substring(0, cifrado.length() - 1);
+//        System.out.println(cifrado);
         String myPintado = "";
         for (int i = 0; i < cifrado.length(); i++) {
             myPintado = myPintado + this.myPintar(cifrado.charAt(i));
+        }
+        return myPintado;
+    }
+
+    private String convertToTextCifradov2(double[][] matriz) {
+        String cifrado = "";
+        for (int i = 0; i < matriz[0].length; i++) {
+            for (int l = 0; l < matriz.length; l++) {
+                cifrado = cifrado + matriz[l][i] + ",";
+            }
+        }
+        cifrado = cifrado.substring(0, cifrado.length() - 1);
+//        System.out.println(cifrado);
+        String myPintado = "";
+        for (int i = 0; i < cifrado.length(); i++) {
+            myPintado = myPintado + this.myPintarNumber(cifrado.charAt(i));
         }
         return myPintado;
     }
@@ -103,6 +144,26 @@ public class encryptionJcondori {
         String sinMyPintado = "";
         for (int i = 0; i < mensaje.length(); i++) {
             sinMyPintado = sinMyPintado + this.myPintarRevert(mensaje.charAt(i));
+        }
+        List<String> numeros = new ArrayList();
+        for (String string : sinMyPintado.split(",")) {
+            numeros.add(string);
+        }
+        double[][] matriz = new double[4][numeros.size() / 4];
+        int i = 0;
+        for (int f = 0; f < matriz[0].length; f++) {
+            for (int c = 0; c < matriz.length; c++) {
+                matriz[c][f] = Double.valueOf(numeros.get(i));
+                i++;
+            }
+        }
+        return matriz;
+    }
+
+    private double[][] convertToMatrizSinMyAsciiv2(String mensaje) {
+        String sinMyPintado = "";
+        for (int i = 0; i < mensaje.length(); i++) {
+            sinMyPintado = sinMyPintado + this.myPintarNumberRevert(mensaje.charAt(i));
         }
         List<String> numeros = new ArrayList();
         for (String string : sinMyPintado.split(",")) {
@@ -165,6 +226,37 @@ public class encryptionJcondori {
         }
     }
 
+    private String myPintarNumber(char numero) {
+        switch (numero) {
+            case '0':
+                return ".";
+            case '1':
+                return ",";
+            case '2':
+                return "9";
+            case '3':
+                return "8";
+            case '4':
+                return "7";
+            case '5':
+                return "6";
+            case '6':
+                return "5";
+            case '7':
+                return "4";
+            case '8':
+                return "3";
+            case '9':
+                return "2";
+            case ',':
+                return "1";
+            case '.':
+                return "0";
+            default:
+                return String.valueOf(numero);
+        }
+    }
+
     //Convierte el caracter especificado por uno mismo al numero correspondiente
     private String myPintarRevert(char numero) {
         switch (numero) {
@@ -191,6 +283,37 @@ public class encryptionJcondori {
             case '❣':
                 return ",";
             case '❢':
+                return ".";
+            default:
+                return String.valueOf(numero);
+        }
+    }
+
+    private String myPintarNumberRevert(char numero) {
+        switch (numero) {
+            case '.':
+                return "0";
+            case ',':
+                return "1";
+            case '9':
+                return "2";
+            case '8':
+                return "3";
+            case '7':
+                return "4";
+            case '6':
+                return "5";
+            case '5':
+                return "6";
+            case '4':
+                return "7";
+            case '3':
+                return "8";
+            case '2':
+                return "9";
+            case '1':
+                return ",";
+            case '0':
                 return ".";
             default:
                 return String.valueOf(numero);
@@ -305,9 +428,18 @@ public class encryptionJcondori {
      ******************************************************************************************************************************************/
 
     private void imprimirMatriz(double[][] mat) {
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[i].length; j++) {
-                System.out.print(mat[i][j] + " ");
+        for (int i = 0; i < mat[1].length; i++) {
+            for (int j = 0; j < mat.length; j++) {
+                System.out.print(mat[j][i] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private void imprimirMatrizSinAcsii(double[][] mat) {
+        for (int i = 0; i < mat[1].length; i++) {
+            for (int j = 0; j < mat.length; j++) {
+                System.out.print(((char) mat[j][i]) + " ");
             }
             System.out.println();
         }
