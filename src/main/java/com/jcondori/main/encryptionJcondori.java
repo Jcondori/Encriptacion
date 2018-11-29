@@ -10,6 +10,15 @@ public class encryptionJcondori {
     //Llave predeterminada
     private double[][] encriptador = {{13, 2, 4, 8}, {9, 1, 6, 5}, {3, 4, 2, 4}, {5, 6, 7, 1}};
 
+    public static String encriptarFinal(String mensaje) {
+        try {
+            encryptionJcondori library = new encryptionJcondori();
+            double[][] resultado = library.multiplicarMatriz(library.encriptador, library.converToMatrizAscii(mensaje));
+            return library.convertToTextCifradoSinDesencriptacion(resultado);
+        } catch (Exception e) {
+            return "Carracteres no validos";
+        }
+    }
 
     public static String encriptar(String mensaje) {
         try {
@@ -81,7 +90,21 @@ public class encryptionJcondori {
             }
         }
         cifrado = cifrado.substring(0, cifrado.length() - 1);
-//        System.out.println(cifrado);
+        String myPintado = "";
+        for (int i = 0; i < cifrado.length(); i++) {
+            myPintado = myPintado + this.myPintar(cifrado.charAt(i));
+        }
+        return myPintado;
+    }
+
+    private String convertToTextCifradoSinDesencriptacion(double[][] matriz) {
+        String cifrado = "";
+        for (int i = 0; i < matriz[0].length; i++) {
+            for (int l = 0; l < matriz.length; l++) {
+                cifrado = cifrado + matriz[l][i];
+            }
+        }
+        cifrado = cifrado.substring(0, cifrado.length() - 1);
         String myPintado = "";
         for (int i = 0; i < cifrado.length(); i++) {
             myPintado = myPintado + this.myPintar(cifrado.charAt(i));

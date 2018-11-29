@@ -3,16 +3,17 @@ package com.jcondori.main;
 public class Main {
 
     public static void main(String[] args) {
-        //Libreria
-        encryptionJcondori jcondori = new encryptionJcondori();
+
+        //Encriptacion sin Desencriptacion
+        System.out.println(encryptionJcondori.encriptarFinal("jcondori"));
 
         //Encriptacion por defecto
-        System.out.println(jcondori.encriptar("jcondori"));
-        System.out.println(jcondori.desencriptar("♠✋☺☺❢☺❣♠♠♪✋❢☺❣☻♣♫♪❢☺❣♠☺☻☻❢☺❣♠☎☻☎❢☺❣♠♠♠☺❢☺❣☻♣✋♠❢☺❣♠☺♪✋❢☺"));
+        System.out.println(encryptionJcondori.encriptar("jcondori"));
+        System.out.println(encryptionJcondori.desencriptar("♠✋☺☺❢☺❣♠♠♪✋❢☺❣☻♣♫♪❢☺❣♠☺☻☻❢☺❣♠☎☻☎❢☺❣♠♠♠☺❢☺❣☻♣✋♠❢☺❣♠☺♪✋❢☺"));
 
         //Encriptacion con llave personalizada
-        System.out.println(jcondori.encriptar(-5, "jcondori"));
-        System.out.println(jcondori.desencriptar(-5, "♫♫☺❢☺❣☻♣✋❢☺❣☼♫♦♥❢☺❣☼☻☻✋❢☺❣♪♪☎❢☺❣♫☺❢☺❣☼♫♦☎❢☺❣☼☎☻❢☺"));
+        System.out.println(encryptionJcondori.encriptar(-5, "jcondori"));
+        System.out.println(encryptionJcondori.desencriptar(-5, "♫♫☺❢☺❣☻♣✋❢☺❣☼♫♦♥❢☺❣☼☻☻✋❢☺❣♪♪☎❢☺❣♫☺❢☺❣☼♫♦☎❢☺❣☼☎☻❢☺"));
 
     }
 }
