@@ -11,50 +11,38 @@ public class encryptionJcondori {
     private double[][] encriptador = {{13, 2, 4, 8}, {9, 1, 6, 5}, {3, 4, 2, 4}, {5, 6, 7, 1}};
 
 
-    public String encriptar(String mensaje) {
+    public static String encriptar(String mensaje) {
         try {
-
-            double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
-//            System.out.println("Matriz llave por defecto");
-//            imprimirMatriz(encriptador);
-//            System.out.println("Matriz resultado");
-//            imprimirMatriz(resultado);
-            return this.convertToTextCifrado(resultado);
+            encryptionJcondori library = new encryptionJcondori();
+            double[][] resultado = library.multiplicarMatriz(library.encriptador, library.converToMatrizAscii(mensaje));
+            return library.convertToTextCifrado(resultado);
         } catch (Exception e) {
             return "Carracteres no validos";
         }
     }
 
-    public String encriptar(int llave, String mensaje) {
+    public static String encriptar(int llave, String mensaje) {
         try {
-
-            double[][] encriptador = alterarMatriz(this.encriptador, llave);
-
-            double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
-
-            return this.convertToTextCifrado(resultado);
-
+            encryptionJcondori library = new encryptionJcondori();
+            double[][] encriptador = library.alterarMatriz(library.encriptador, llave);
+            double[][] resultado = library.multiplicarMatriz(encriptador, library.converToMatrizAscii(mensaje));
+            return library.convertToTextCifrado(resultado);
         } catch (Exception e) {
             return "Carracteres no validos";
         }
     }
 
-    public String desencriptar(String mensaje) {
-
-        double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
-
-        return this.convertToMensaje(resultado);
-
+    public static String desencriptar(String mensaje) {
+        encryptionJcondori library = new encryptionJcondori();
+        double[][] resultado = library.multiplicarMatriz(library.matrizInversa(library.encriptador), library.convertToMatrizSinMyAscii(mensaje));
+        return library.convertToMensaje(resultado);
     }
 
-    public String desencriptar(int llave, String mensaje) {
-
-        double[][] encriptador = alterarMatriz(this.encriptador, llave);
-
-        double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
-
-        return this.convertToMensaje(resultado);
-
+    public static String desencriptar(int llave, String mensaje) {
+        encryptionJcondori library = new encryptionJcondori();
+        double[][] encriptador = library.alterarMatriz(library.encriptador, llave);
+        double[][] resultado = library.multiplicarMatriz(library.matrizInversa(encriptador), library.convertToMatrizSinMyAscii(mensaje));
+        return library.convertToMensaje(resultado);
     }
 
     //Convierte la matriz descifrada al mensaje original del usuario
@@ -80,10 +68,6 @@ public class encryptionJcondori {
                 i++;
             }
         }
-//        System.out.println("Matriz mensaje");
-//        imprimirMatrizSinAcsii(matriz);
-//        System.out.println("Matriz mensaje ascci");
-//        imprimirMatriz(matriz);
         return matriz;
     }
 
