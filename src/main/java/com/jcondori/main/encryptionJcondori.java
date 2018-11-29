@@ -25,15 +25,6 @@ public class encryptionJcondori {
         }
     }
 
-    public String encriptarv2(String mensaje) {
-        try {
-            double[][] resultado = this.multiplicarMatriz(encriptador, this.converToMatrizAscii(mensaje));
-            return this.convertToTextCifradov2(resultado);
-        } catch (Exception e) {
-            return "Carracteres no validos";
-        }
-    }
-
     public String encriptar(int llave, String mensaje) {
         try {
 
@@ -51,14 +42,6 @@ public class encryptionJcondori {
     public String desencriptar(String mensaje) {
 
         double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAscii(mensaje));
-
-        return this.convertToMensaje(resultado);
-
-    }
-
-    public String desencriptarv2(String mensaje) {
-
-        double[][] resultado = this.multiplicarMatriz(this.matrizInversa(encriptador), this.convertToMatrizSinMyAsciiv2(mensaje));
 
         return this.convertToMensaje(resultado);
 
@@ -122,48 +105,12 @@ public class encryptionJcondori {
         return myPintado;
     }
 
-    private String convertToTextCifradov2(double[][] matriz) {
-        String cifrado = "";
-        for (int i = 0; i < matriz[0].length; i++) {
-            for (int l = 0; l < matriz.length; l++) {
-                cifrado = cifrado + matriz[l][i] + ",";
-            }
-        }
-        cifrado = cifrado.substring(0, cifrado.length() - 1);
-//        System.out.println(cifrado);
-        String myPintado = "";
-        for (int i = 0; i < cifrado.length(); i++) {
-            myPintado = myPintado + this.myPintarNumber(cifrado.charAt(i));
-        }
-        return myPintado;
-    }
-
     //Convierte el texto cifrado a una matriz cifrada con sus valores numericos
     //Usando la tabla personalizada de conversion de caracteres
     private double[][] convertToMatrizSinMyAscii(String mensaje) {
         String sinMyPintado = "";
         for (int i = 0; i < mensaje.length(); i++) {
             sinMyPintado = sinMyPintado + this.myPintarRevert(mensaje.charAt(i));
-        }
-        List<String> numeros = new ArrayList();
-        for (String string : sinMyPintado.split(",")) {
-            numeros.add(string);
-        }
-        double[][] matriz = new double[4][numeros.size() / 4];
-        int i = 0;
-        for (int f = 0; f < matriz[0].length; f++) {
-            for (int c = 0; c < matriz.length; c++) {
-                matriz[c][f] = Double.valueOf(numeros.get(i));
-                i++;
-            }
-        }
-        return matriz;
-    }
-
-    private double[][] convertToMatrizSinMyAsciiv2(String mensaje) {
-        String sinMyPintado = "";
-        for (int i = 0; i < mensaje.length(); i++) {
-            sinMyPintado = sinMyPintado + this.myPintarNumberRevert(mensaje.charAt(i));
         }
         List<String> numeros = new ArrayList();
         for (String string : sinMyPintado.split(",")) {
@@ -228,37 +175,6 @@ public class encryptionJcondori {
         }
     }
 
-    private String myPintarNumber(char numero) {
-        switch (numero) {
-            case '0':
-                return ".";
-            case '1':
-                return "-";
-            case '2':
-                return "9";
-            case '3':
-                return "8";
-            case '4':
-                return "7";
-            case '5':
-                return "6";
-            case '6':
-                return "5";
-            case '7':
-                return "4";
-            case '8':
-                return "3";
-            case '9':
-                return "2";
-            case '-':
-                return "1";
-            case '.':
-                return "0";
-            default:
-                return String.valueOf(numero);
-        }
-    }
-
     //Convierte el caracter especificado por uno mismo al numero correspondiente
     private String myPintarRevert(char numero) {
         switch (numero) {
@@ -288,37 +204,6 @@ public class encryptionJcondori {
                 return ".";
             case '☼':
                 return "-";
-            default:
-                return String.valueOf(numero);
-        }
-    }
-
-    private String myPintarNumberRevert(char numero) {
-        switch (numero) {
-            case '.':
-                return "0";
-            case '-':
-                return "1";
-            case '9':
-                return "2";
-            case '8':
-                return "3";
-            case '7':
-                return "4";
-            case '6':
-                return "5";
-            case '5':
-                return "6";
-            case '4':
-                return "7";
-            case '3':
-                return "8";
-            case '2':
-                return "9";
-            case '1':
-                return "-";
-            case '0':
-                return ".";
             default:
                 return String.valueOf(numero);
         }
