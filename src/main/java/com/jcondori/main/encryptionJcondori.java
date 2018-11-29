@@ -231,7 +231,7 @@ public class encryptionJcondori {
             case '0':
                 return ".";
             case '1':
-                return ",";
+                return "-";
             case '2':
                 return "9";
             case '3':
@@ -248,7 +248,7 @@ public class encryptionJcondori {
                 return "3";
             case '9':
                 return "2";
-            case ',':
+            case '-':
                 return "1";
             case '.':
                 return "0";
@@ -293,7 +293,7 @@ public class encryptionJcondori {
         switch (numero) {
             case '.':
                 return "0";
-            case ',':
+            case '-':
                 return "1";
             case '9':
                 return "2";
@@ -312,7 +312,7 @@ public class encryptionJcondori {
             case '2':
                 return "9";
             case '1':
-                return ",";
+                return "-";
             case '0':
                 return ".";
             default:

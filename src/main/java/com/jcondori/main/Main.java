@@ -7,12 +7,12 @@ public class Main {
         encryptionJcondori jcondori = new encryptionJcondori();
 
         //Encriptacion por defecto
-        System.out.println(jcondori.encriptar("jcondori"));
-        System.out.println(jcondori.desencriptar("♠✋☺☺❢☺❣♠♠♪✋❢☺❣☻♣♫♪❢☺❣♠☺☻☻❢☺❣♠☎☻☎❢☺❣♠♠♠☺❢☺❣☻♣✋♠❢☺❣♠☺♪✋❢☺"));
+//        System.out.println(jcondori.encriptar("jcondori"));
+//        System.out.println(jcondori.desencriptar("♠✋☺☺❢☺❣♠♠♪✋❢☺❣☻♣♫♪❢☺❣♠☺☻☻❢☺❣♠☎☻☎❢☺❣♠♠♠☺❢☺❣☻♣✋♠❢☺❣♠☺♪✋❢☺"));
 
         //Encriptacion con llave personalizada
-        System.out.println(jcondori.encriptar("jcondori",5));
-        System.out.println(jcondori.desencriptar("♦☺♣☺❢☺❣♥♣✋✋❢☺❣♣♦☺♪❢☺❣♥☻♥☻❢☺❣♥✋♪☎❢☺❣♥♣♫☺❢☺❣♣♦♥♠❢☺❣♥♠☻✋❢☺", 5));
+//        System.out.println(jcondori.encriptar("jcondori",5));
+//        System.out.println(jcondori.desencriptar("♦☺♣☺❢☺❣♥♣✋✋❢☺❣♣♦☺♪❢☺❣♥☻♥☻❢☺❣♥✋♪☎❢☺❣♥♣♫☺❢☺❣♣♦♥♠❢☺❣♥♠☻✋❢☺", 5));
 
     }
 }
