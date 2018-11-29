@@ -219,6 +219,8 @@ public class encryptionJcondori {
                 return "✋";
             case ',':
                 return "❣";
+            case '-':
+                return "☼";
             case '.':
                 return "❢";
             default:
@@ -284,6 +286,8 @@ public class encryptionJcondori {
                 return ",";
             case '❢':
                 return ".";
+            case '☼':
+                return "-";
             default:
                 return String.valueOf(numero);
         }

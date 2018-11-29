@@ -11,8 +11,8 @@ public class Main {
         System.out.println(jcondori.desencriptar("♠✋☺☺❢☺❣♠♠♪✋❢☺❣☻♣♫♪❢☺❣♠☺☻☻❢☺❣♠☎☻☎❢☺❣♠♠♠☺❢☺❣☻♣✋♠❢☺❣♠☺♪✋❢☺"));
 
         //Encriptacion con llave personalizada
-        System.out.println(jcondori.encriptar(5, "jcondori"));
-        System.out.println(jcondori.desencriptar(5, "♦☺♣☺❢☺❣♥♣✋✋❢☺❣♣♦☺♪❢☺❣♥☻♥☻❢☺❣♥✋♪☎❢☺❣♥♣♫☺❢☺❣♣♦♥♠❢☺❣♥♠☻✋❢☺"));
+        System.out.println(jcondori.encriptar(-5, "jcondori"));
+        System.out.println(jcondori.desencriptar(-5, "♫♫☺❢☺❣☻♣✋❢☺❣☼♫♦♥❢☺❣☼☻☻✋❢☺❣♪♪☎❢☺❣♫☺❢☺❣☼♫♦☎❢☺❣☼☎☻❢☺"));
 
     }
 }
