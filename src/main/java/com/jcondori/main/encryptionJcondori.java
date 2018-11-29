@@ -34,7 +34,7 @@ public class encryptionJcondori {
         }
     }
 
-    public String encriptar(String mensaje, int llave) {
+    public String encriptar(int llave, String mensaje) {
         try {
 
             double[][] encriptador = alterarMatriz(this.encriptador, llave);
@@ -64,7 +64,7 @@ public class encryptionJcondori {
 
     }
 
-    public String desencriptar(String mensaje, int llave) {
+    public String desencriptar(int llave, String mensaje) {
 
         double[][] encriptador = alterarMatriz(this.encriptador, llave);
 
